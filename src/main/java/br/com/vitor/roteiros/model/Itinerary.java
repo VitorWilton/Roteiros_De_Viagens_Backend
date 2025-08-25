@@ -1,11 +1,10 @@
 package br.com.vitor.roteiros.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDate;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Data
 @Entity
 public class Itinerary {
 
@@ -14,9 +13,27 @@ public class Itinerary {
     private Long id;
 
     private String name;
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
     private String destination;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // Chave estrangeira
+    private User user;
+
+    @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<POI> pois;
+
+
+    public Itinerary() {}
+
 
     public Long getId() {
         return id;
@@ -73,11 +90,4 @@ public class Itinerary {
     public void setPois(Set<POI> pois) {
         this.pois = pois;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // Chave estrangeira
-    private User user;
-
-    @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<POI> pois;
 }

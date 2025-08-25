@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service // Marca a classe como um Serviço do Spring
+@Service
 public class ItineraryService {
 
-    @Autowired // Injeção de dependência do repositório
+    @Autowired
     private ItineraryRepository itineraryRepository;
 
-    // Injetamos o UserRepository para associar o roteiro a um usuário
+
     @Autowired
     private UserRepository userRepository;
 

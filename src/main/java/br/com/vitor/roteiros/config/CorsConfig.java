@@ -1,4 +1,4 @@
-package br.com.vitor.roteiros; // Verifique se este é o pacote raiz da sua aplicação
+package br.com.vitor.roteiros.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
