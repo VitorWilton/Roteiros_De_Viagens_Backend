@@ -16,38 +16,31 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /**
-     * Este método configura as regras de segurança HTTP (quem pode acessar o quê).
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. Desabilita o CSRF (o que corrige o erro 403 no POST)
+
                 .csrf(csrf -> csrf.disable())
 
-                // 2. Habilita o CORS (usa a configuração definida no método abaixo)
+
                 .cors(Customizer.withDefaults())
 
-                // 3. Define as regras de autorização para cada endpoint
+
                 .authorizeHttpRequests(authorize -> authorize
-                        // Permite acesso PÚBLICO a todos os endpoints de users e itineraries
+
                         .requestMatchers("/api/users/**", "/api/itineraries/**").permitAll()
-                        // Exige que qualquer outra requisição seja autenticada
+
                         .anyRequest().authenticated()
                 );
         return http.build();
     }
 
-    /**
-     * Este método define as regras de CORS, dizendo ao navegador
-     * que é seguro para o front-end acessar o back-end.
-     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Permite requisições do seu front-end React
         configuration.setAllowedOrigins(List.of("http://localhost:5173"));
-        // Permite os métodos HTTP que sua aplicação vai usar
+        // Permite os métodos HTTP que a aplicação vai usar
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permite todos os cabeçalhos nas requisições
         configuration.setAllowedHeaders(List.of("*"));

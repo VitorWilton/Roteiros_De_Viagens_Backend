@@ -43,7 +43,7 @@ public class ItineraryService {
     // --- MÉTODO DE LISTAGEM ATUALIZADO ---
     public List<ItineraryResponseDTO> getAllItinerariesByUser(Long userId) {
         return itineraryRepository.findByUserId(userId).stream()
-                .map(this::convertToResponseDto) // Usa o método de conversão para cada item da lista
+                .map(this::convertToResponseDto)
                 .collect(Collectors.toList());
     }
 

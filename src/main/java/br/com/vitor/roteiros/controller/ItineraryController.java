@@ -16,7 +16,7 @@ public class ItineraryController {
     @Autowired
     private ItineraryService itineraryService;
 
-    // Endpoint de criação agora espera um ItineraryRequestDTO
+
     @PostMapping
     public ResponseEntity<ItineraryResponseDTO> createItinerary(@RequestBody ItineraryRequestDTO itineraryDto) {
         try {
@@ -28,7 +28,6 @@ public class ItineraryController {
         }
     }
 
-    // Endpoint de listagem agora retorna uma lista de ItineraryResponseDTO
     @GetMapping
     public ResponseEntity<List<ItineraryResponseDTO>> getAllItinerariesByUser(@RequestParam Long userId) {
         List<ItineraryResponseDTO> itineraries = itineraryService.getAllItinerariesByUser(userId);

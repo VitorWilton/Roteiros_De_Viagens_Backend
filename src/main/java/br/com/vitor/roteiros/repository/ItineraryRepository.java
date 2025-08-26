@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface ItineraryRepository extends JpaRepository<Itinerary, Long> {
-    // Exemplo de método de busca customizado
     List<Itinerary> findByUserId(Long userId);
 }
